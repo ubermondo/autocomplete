@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+    <title>autocomplete.</title>
+
+    <!-- pulling in bootstrap and fontawesome CSS files from their respective CDNs -->
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- local stylesheet - DO NOT CHANGE MAIN.MIN.CSS. Instead, make changes in main.less and compress into main.min.css -->
+		<link href="%PUBLIC_URL%/style/main.min.css" rel="stylesheet" />
+
+    <!-- dealing with IE 9 -->
+		<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+
+    <main role="main">
+
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">autocomplete editor</h1>
+          <p class="lead">
+            As you enter your text, the editor will intercept your octathorpe ("<strong>&num;</strong>") and asperand ("<strong>&commat;</strong>") keys, as well as the "<strong>&lt;&gt;</strong>" string, and will trigger an autocomplete process, suggesting hashtags, persons, and relations, respectively.
+          </p>
+        </div>
+      </div>
+
+      <div class="container">
+        <form id="autocompleteEditorForm">
+
+          <div class="form-group" id="autocompleteEditorGroup">
+            <label for="autocompleteEditor">Enter text here:</label>
+            <div id="autocompleteEditor"></div>
+          </div>
+
+        </form>
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Thank you for your consideration.</p>
+      </div>
+    </footer>
+
+    <!-- pulling in jquery and bootstrap files from their respective CDNs -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

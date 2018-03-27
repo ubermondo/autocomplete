@@ -1,0 +1,15 @@
+{
+  "short_name": "autocomplete editor",
+  "name": "As you enter your text, the editor will intercept your octathorpe (\"#\") and asperand (\"@\") keys, as well as the \"<>\" string, and will trigger an autocomplete process, suggesting hashtags, persons, and relations, respectively.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
