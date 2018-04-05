@@ -44,14 +44,18 @@ class App extends Component {
           return data.relations;
       }
     })(type);
-    const filteredArray = filterArray(dataArray, text.replace(triggers.regExByType(type), ''));
-    return filteredArray;
+    return filterArray(dataArray, text.replace(triggers.regExByType(type), ''));
   }
   render() {
     return (<div>
       {this.renderAutocomplete()}
       <div>
-        <Autocompleter editorState={this.state.editorState} onChange={this.onChange} onAutocompleteChange={this.onAutocompleteChange} onInsert={this.onInsert}/>
+        <Autocompleter
+          editorState={this.state.editorState}
+          onChange={this.onChange}
+          onAutocompleteChange={this.onAutocompleteChange}
+          onInsert={this.onInsert}
+        />
       </div>
     </div>);
   }

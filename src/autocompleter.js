@@ -79,11 +79,13 @@ class Autocompleter extends React.Component {
   };
   onSuggestionSelect() {
     let autocompleteState = this.getAutocompleteState(false);
-    const insertState = this.getInsertState(autocompleteState.selectedIndex, autocompleteState.trigger);
-    const {onInsert} = this.props;
-    const newEditorState = onInsert(insertState);
-    const {onChange} = this.props;
-    onChange(newEditorState);
+    const insertState = this.getInsertState(
+      autocompleteState.selectedIndex,
+      autocompleteState.trigger
+    );
+    const newEditorState = this.props.onInsert(insertState);
+    this.props.onChange(newEditorState);
+
   };
   getInsertState(selectedIndex, trigger) {
     const {editorState} = this.props;
@@ -180,12 +182,11 @@ class Autocompleter extends React.Component {
     const tempRange = window.getSelection().getRangeAt(0).cloneRange();
     tempRange.setStart(tempRange.startContainer, range.start);
     const rangeRect = tempRange.getBoundingClientRect();
-    let [left, top] = [rangeRect.left, rangeRect.bottom];
     this.autocompleteState = {
       trigger,
       type,
-      left,
-      top,
+      left: rangeRect.left,
+      top: rangeRect.bottom,
       text: range.text,
       selectedIndex: 0
     };
