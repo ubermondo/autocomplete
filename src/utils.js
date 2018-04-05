@@ -4,6 +4,7 @@ export const filterArray = (array, text) => {
     const query = text.toLowerCase();
     return object.toLowerCase().startsWith(query);
   });
+  if (filteredArray.length === 0) filteredArray.push(text);
   return filteredArray;
 };
 
