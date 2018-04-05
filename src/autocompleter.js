@@ -11,13 +11,13 @@ class Autocompleter extends React.Component {
       onChange(editorState);
       if (onAutocompleteChange) {
         window.requestAnimationFrame(() => {
-          onAutocompleteChange(this.getAutocompleteState());
+          onAutocompleteChange(this.createNewAutocompleteState());
         });
       };
     };
     this.onArrow = (e, originalHandler, nudgeAmount) => {
       const {onAutocompleteChange} = this.props;
-      let autocompleteState = this.getAutocompleteState(false);
+      let autocompleteState = this.getCurrentAutocompleteState();
       if (!autocompleteState) {
         if (originalHandler) {
           originalHandler(e);
@@ -39,7 +39,7 @@ class Autocompleter extends React.Component {
     };
     this.onEscape = (e) => {
       const {onEscape, onAutocompleteChange} = this.props;
-      if (!this.getAutocompleteState(false)) {
+      if (!this.getCurrentAutocompleteState()) {
         if (onEscape) {
           onEscape(e);
         }
@@ -65,7 +65,7 @@ class Autocompleter extends React.Component {
   }
   commitSelection(e) {
     const {onAutocompleteChange} = this.props;
-    let autocompleteState = this.getAutocompleteState(false);
+    let autocompleteState = this.getCurrentAutocompleteState();
     if (!autocompleteState) {
       return "not-handled";
     }
@@ -78,7 +78,7 @@ class Autocompleter extends React.Component {
     return "handled";
   };
   onSuggestionSelect() {
-    let autocompleteState = this.getAutocompleteState(false);
+    let autocompleteState = this.getCurrentAutocompleteState();
     const insertState = this.getInsertState(
       autocompleteState.selectedIndex,
       autocompleteState.trigger
@@ -125,10 +125,7 @@ class Autocompleter extends React.Component {
     text = text.substring(index);
     return {text, start: index, end: range.startOffset};
   };
-  getAutocompleteState(invalidate = true) {
-    if (!invalidate) {
-      return this.autocompleteState;
-    }
+  createNewAutocompleteState() {
     let type = null;
     let trigger = null;
     const hashtagRange = this.getAutocompleteRange(triggers.HASHTAG_TRIGGER);
@@ -177,7 +174,7 @@ class Autocompleter extends React.Component {
         type = triggers.RELATION;
         trigger = triggers.RELATION_TRIGGER;
       }
-    }
+    };
     const tempRange = window.getSelection().getRangeAt(0).cloneRange();
     tempRange.setStart(tempRange.startContainer, range.start);
     const rangeRect = tempRange.getBoundingClientRect();
@@ -189,6 +186,9 @@ class Autocompleter extends React.Component {
       text: range.text,
       selectedIndex: 0
     };
+    return this.autocompleteState;
+  };
+  getCurrentAutocompleteState() {
     return this.autocompleteState;
   };
   render() {
