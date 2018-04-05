@@ -22,7 +22,7 @@ class Autocompleter extends React.Component {
         if (originalHandler) {
           originalHandler(e);
         }
-        return;
+        return "not-handled";
       }
       e.preventDefault();
       autocompleteState.selectedIndex += nudgeAmount;
@@ -52,14 +52,14 @@ class Autocompleter extends React.Component {
       }
     };
     this.onTab = (e) => {
-      this.commitSelection(e)
+      this.commitSelection(e);
     };
     this.handleReturn = (e) => {
-      return this.commitSelection(e);
+      this.commitSelection(e);
     }
     this.keyBindingFn = (e) => {
       if (e.keyCode === 32) {
-        return this.commitSelection(e);
+        this.commitSelection(e);
       }
     }
   }
@@ -67,7 +67,7 @@ class Autocompleter extends React.Component {
     const {onAutocompleteChange} = this.props;
     let autocompleteState = this.getAutocompleteState(false);
     if (!autocompleteState) {
-      return false;
+      return "not-handled";
     }
     e.preventDefault();
     this.onSuggestionSelect();
@@ -75,7 +75,7 @@ class Autocompleter extends React.Component {
     if (onAutocompleteChange) {
       onAutocompleteChange(null);
     }
-    return true;
+    return "handled";
   };
   onSuggestionSelect() {
     let autocompleteState = this.getAutocompleteState(false);
@@ -85,7 +85,6 @@ class Autocompleter extends React.Component {
     );
     const newEditorState = this.props.onInsert(insertState);
     this.props.onChange(newEditorState);
-
   };
   getInsertState(selectedIndex, trigger) {
     const {editorState} = this.props;
@@ -156,13 +155,13 @@ class Autocompleter extends React.Component {
       trigger = triggers.RELATION_TRIGGER;
     }
     if (!range) {
-      let hashtagStart = (hashtagRange && hashtagRange.hasOwnProperty("start"))
+      const hashtagStart = (hashtagRange && hashtagRange.hasOwnProperty("start"))
         ? hashtagRange.start
         : 0;
-      let personStart = (personRange && personRange.hasOwnProperty("start"))
+      const personStart = (personRange && personRange.hasOwnProperty("start"))
         ? personRange.start
         : 0;
-      let relationStart = (relationRange && relationRange.hasOwnProperty("start"))
+      const relationStart = (relationRange && relationRange.hasOwnProperty("start"))
         ? relationRange.start
         : 0;
       if ((hashtagStart > personStart) && (hashtagStart > relationStart)) {
