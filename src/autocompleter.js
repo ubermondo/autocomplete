@@ -15,18 +15,16 @@ class Autocompleter extends React.Component {
     };
     this.onArrow = (e, originalHandler, nudgeAmount) => {
       const {onAutocompleteChange} = this.props;
-      let autocompleteState = this.getCurrentAutocompleteState();
-      if (!autocompleteState) {
+      if (!this.autocompleteState) {
         if (originalHandler) {
           originalHandler(e);
         }
         return "not-handled";
       }
       e.preventDefault();
-      autocompleteState.selectedIndex += nudgeAmount;
-      this.autocompleteState = autocompleteState;
+      this.autocompleteState.selectedIndex += nudgeAmount;
       if (onAutocompleteChange) {
-        onAutocompleteChange(autocompleteState);
+        onAutocompleteChange(this.autocompleteState);
       }
     };
     this.onUpArrow = (e) => {
@@ -37,7 +35,7 @@ class Autocompleter extends React.Component {
     };
     this.onEscape = (e) => {
       const {onEscape, onAutocompleteChange} = this.props;
-      if (!this.getCurrentAutocompleteState()) {
+      if (!this.autocompleteState) {
         if (onEscape) {
           onEscape(e);
         }
@@ -63,8 +61,7 @@ class Autocompleter extends React.Component {
   }
   commitSelection(e) {
     const {onAutocompleteChange} = this.props;
-    let autocompleteState = this.getCurrentAutocompleteState();
-    if (!autocompleteState) {
+    if (!this.autocompleteState) {
       return "not-handled";
     }
     e.preventDefault();
@@ -76,10 +73,9 @@ class Autocompleter extends React.Component {
     return "handled";
   };
   onSuggestionSelect() {
-    let autocompleteState = this.getCurrentAutocompleteState();
     const insertState = this.getInsertState(
-      autocompleteState.selectedIndex,
-      autocompleteState.trigger
+      this.autocompleteState.selectedIndex,
+      this.autocompleteState.trigger
     );
     const newEditorState = this.props.onInsert(insertState);
     this.props.onChange(newEditorState);
@@ -184,9 +180,6 @@ class Autocompleter extends React.Component {
       text: range.text,
       selectedIndex: 0
     };
-    return this.autocompleteState;
-  };
-  getCurrentAutocompleteState() {
     return this.autocompleteState;
   };
   render() {
