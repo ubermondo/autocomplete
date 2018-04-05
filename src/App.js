@@ -11,8 +11,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      editorState: EditorState.createEmpty(),
-      autocompleteState: null
+      editorState: EditorState.createEmpty()
     };
     this.filteredArrayTemp = [];
     this.onChange = (editorState) => this.setState({editorState});
