@@ -2,7 +2,7 @@ import React from 'react';
 import {Editor} from 'draft-js';
 import * as triggers from './triggers';
 
-class AutocompleteEditor extends Editor {
+class Autocompleter extends React.Component {
   constructor(props) {
     super(props);
     this.autocompleteState = null;
@@ -208,4 +208,4 @@ class AutocompleteEditor extends Editor {
   }
 }
 
-export default AutocompleteEditor;
+export default Autocompleter;

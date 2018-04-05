@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {EditorState} from 'draft-js';
-import AutocompleteEditor from './editor';
-import SuggestionList from './suggestions';
+import Autocompleter from './autocompleter';
+import SuggestionList from './suggestionlist';
 import {normalizeIndex, filterArray} from './utils';
 import * as triggers from './triggers';
 import * as data from './data';
 import addSuggestion from './addsuggestion';
-
-// let filteredArrayTemp = [];
 
 class App extends Component {
   constructor() {
@@ -53,7 +51,7 @@ class App extends Component {
     return (<div>
       {this.renderAutocomplete()}
       <div>
-        <AutocompleteEditor editorState={this.state.editorState} onChange={this.onChange} onAutocompleteChange={this.onAutocompleteChange} onInsert={this.onInsert}/>
+        <Autocompleter editorState={this.state.editorState} onChange={this.onChange} onAutocompleteChange={this.onAutocompleteChange} onInsert={this.onInsert}/>
       </div>
     </div>);
   }
