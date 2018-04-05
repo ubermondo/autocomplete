@@ -7,7 +7,7 @@ import * as triggers from './triggers';
 import * as data from './data';
 import addSuggestion from './addsuggestion';
 
-let filteredArrayTemp = [];
+// let filteredArrayTemp = [];
 
 class App extends Component {
   constructor() {
@@ -16,14 +16,12 @@ class App extends Component {
       editorState: EditorState.createEmpty(),
       autocompleteState: null
     };
+    this.filteredArrayTemp = [];
     this.onChange = (editorState) => this.setState({editorState});
     this.onAutocompleteChange = (autocompleteState) => this.setState({autocompleteState});
     this.onInsert = (insertState) => {
-      if (!filteredArrayTemp) {
-        return null;
-      }
-      const index = normalizeIndex(insertState.selectedIndex, filteredArrayTemp.length);
-      insertState.text = insertState.trigger + filteredArrayTemp[index];
+      const index = normalizeIndex(insertState.selectedIndex, this.filteredArrayTemp.length);
+      insertState.text = insertState.trigger + this.filteredArrayTemp[index];
       return addSuggestion(insertState);
     };
   }
@@ -32,8 +30,8 @@ class App extends Component {
     if (!autocompleteState) {
       return null;
     }
-    filteredArrayTemp = this.getFilteredArray(autocompleteState.type, autocompleteState.text);
-    autocompleteState.array = filteredArrayTemp;
+    this.filteredArrayTemp = this.getFilteredArray(autocompleteState.type, autocompleteState.text);
+    autocompleteState.array = this.filteredArrayTemp;
     autocompleteState.onSuggestionClick = this.onSuggestionItemClick;
     return <SuggestionList suggestionsState={autocompleteState}/>;
   }
