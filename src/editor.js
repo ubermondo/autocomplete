@@ -33,7 +33,6 @@ class AutocompleteEditor extends Editor {
     };
     this.onUpArrow = (e) => {
       this.onArrow(e, this.props.onUpArrow, -1);
-      //const contentState = editorState.getCurrentContent();
     };
     this.onDownArrow = (e) => {
       this.onArrow(e, this.props.onDownArrow, 1);
@@ -57,6 +56,11 @@ class AutocompleteEditor extends Editor {
     };
     this.handleReturn = (e) => {
       return this.commitSelection(e);
+    }
+    this.keyBindingFn = (e) => {
+      if (e.keyCode === 32) {
+        return this.commitSelection(e);
+      }
     }
   }
   commitSelection(e) {
@@ -189,7 +193,18 @@ class AutocompleteEditor extends Editor {
   };
   render() {
     const {editorState} = this.props;
-    return (<Editor editorState={editorState} handleReturn={this.handleReturn} onChange={this.onChange} onEscape={this.onEscape} onUpArrow={this.onUpArrow} onDownArrow={this.onDownArrow} onTab={this.onTab}/>);
+    return (
+      <Editor
+        editorState={editorState}
+        handleReturn={this.handleReturn}
+        keyBindingFn={this.keyBindingFn}
+        onChange={this.onChange}
+        onEscape={this.onEscape}
+        onUpArrow={this.onUpArrow}
+        onDownArrow={this.onDownArrow}
+        onTab={this.onTab}
+      />
+    );
   }
 }
 
