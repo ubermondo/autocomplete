@@ -10,9 +10,7 @@ class Autocompleter extends React.Component {
       const {onChange, onAutocompleteChange} = this.props;
       onChange(editorState);
       if (onAutocompleteChange) {
-        window.requestAnimationFrame(() => {
-          onAutocompleteChange(this.createNewAutocompleteState());
-        });
+        onAutocompleteChange(this.createNewAutocompleteState());
       };
     };
     this.onArrow = (e, originalHandler, nudgeAmount) => {
